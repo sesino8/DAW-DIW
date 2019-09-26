@@ -1,0 +1,71 @@
+h1 {
+    text-align: center;
+}
+
+body {
+    background: grey;
+    font-family: 'Open Sans';
+}
+
+nav {
+    text-align: center;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+h1 {
+    text-align: center;
+}
+
+ul {
+    overflow: hidden;
+    list-style: none;
+    text-align: left;
+}
+
+li {
+    width: 15%;
+    padding: 8%;
+    display: inline-block;
+}
+
+li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+a[rel='alternate']:before {
+    display: inline-block;
+    content: url('');
+}
+
+a[rel='next']:before {
+    display: inline-block;
+    content: url('./add_circle_outline-24px.svg');
+}
+
+a[rel='tag']:before {
+    display: inline-block;
+    content: url('./local_grocery_store-24px.svg');
+}
+
+a[rel='bookmark']:before {
+    display: inline-block;
+    content: url('./24px.svg');
+}
+
+a[rel='help']:before {
+    display: inline-block;
+    content: url('./picture_as_pdf-24px.svg');
+}
+
+a[rel='search']:before {
+    display: inline-block;
+    content: url('./account_circle-24px.svg');
+}
+
+a[rel='nofollow']:before {
+    display: inline-block;
+    content: url('./security-24px.svg');
+}
