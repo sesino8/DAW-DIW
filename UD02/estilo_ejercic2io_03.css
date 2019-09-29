@@ -1,0 +1,27 @@
+h1, h2{
+    font-weight: bold;
+}
+
+h2:first-of-type{
+    color: rgb(189, 31, 31);
+}
+
+h2:first-letter{
+    color: red;
+}
+
+ul{
+    list-style: none;
+}
+
+li:nth-child(3){
+   color: lime;
+}
+
+li:nth-child(even):hover::after{
+    content: "  Alabado sea el Monstruo Espagetti Volador"
+}
+
+li:nth-child(odd):hover::before{
+    content: "Satán !  "
+} 
