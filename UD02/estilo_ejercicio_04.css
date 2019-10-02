@@ -1,0 +1,45 @@
+body{
+
+    font-family: 'Grenze';
+
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+input:target{
+
+    background-color:blue;
+    color: white;
+
+}
+input{
+
+    background-color: orange;
+}
+
+input[type='submit']{
+
+    border-radius: 50px;
+    border: none;
+}
+
+input:invalid{
+
+    background-color: rgb(228, 164, 91);
+
+}
+
+input[type='checkbox']:checked{
+    
+    content:  url(./cthulhu.svg);
+    
+
+}
+
+
+select{
+    
+    border-radius: 50px;
+}
