@@ -7,7 +7,10 @@ a{
     text-decoration: none;
     color: black;
 }
-
+div{
+    padding-top: 1%;
+    padding-left: 1%;
+}
 input:target{
 
     background-color:blue;
@@ -16,7 +19,7 @@ input:target{
 }
 input{
 
-    background-color: orange;
+    background-color: rgb(241, 195, 109);
 }
 
 input[type='submit']{
@@ -31,15 +34,33 @@ input:invalid{
 
 }
 
-input[type='checkbox']:checked{
-    
-    content:  url(./cthulhu.svg);
-    
+input[value='Crear Personaje']{
+
+    font-family: "Grenze";
+    text-transform: uppercase;
+    width: auto;
+    box-shadow: 0 12px 10px 0px rgb(240, 240, 240);
+}
+
+
+input[type='checkbox']:checked::after{
+
+    display: block;
+    content: "";
+    background-image: url(cthulhu.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;   
 
 }
 
 
+
 select{
-    
+    background-color: rgb(204, 204, 204);
     border-radius: 50px;
 }
