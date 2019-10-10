@@ -69,12 +69,18 @@ h6 {
     margin: 0 0 5px 0;
 }
 
+/*damos formato al container para hacerlo un grid, despues de esto anadimos
+ las columnas y el espacio entre filas y columnas*/
+
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr 2fr;
     grid-row-gap: 10px;
     grid-column-gap: 10px;
 }
+
+/*Hacemos que la fila del Cthulhu aparezca cogiendo 3 columnas*/
+
 .item2{
     grid-column-start: 2;
     grid-column-end: 5;
@@ -83,10 +89,28 @@ h6 {
 
 .item:nth-child(odd){
 
-background-color: lightgrey;
+background-color: var(--grey);
+}
+
+/*Hacemos que el hover de los impares + el item de atras tengan borde negro*/
+.item:nth-child(odd):hover+.item,.item:nth-child(odd):hover{
+     box-shadow:10px 10px 5px 0px;
 }
 
 h1{
     text-align: center;
-    padding-bottom: 3%;
+    padding-bottom: 2%;
+}
+
+/*Maquinamos al Cthulhu para que salga a la derecha y en posicion fija*/
+
+#SealOfApproval{
+
+    background-image: url(./cthulhu_approval.gif) ;
+    background-repeat:no-repeat;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 100px;
+    width: 100px
 }
