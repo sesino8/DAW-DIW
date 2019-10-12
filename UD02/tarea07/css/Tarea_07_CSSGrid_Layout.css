@@ -1,20 +1,45 @@
+/*Maquetamos la pagina con los grid areas*/
 .pagina{
 
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 250px 1fr;
     grid-template-rows: auto;
     grid-template-areas: "header header"
                          "nav main"
                          "footer footer";
 }
+/*Asignamos los grid area a cada seccion de la pagina*/
 header{
     grid-area: header;
     text-align: center;
     padding-bottom: 5%;
 }
+/*Ponemos diseño al nav para que sea vertical y con box shadow le ponemos sombra a los enlaces*/
 nav{
     grid-area: nav;
+    padding-left: 5%;
+
 }
+nav li {
+    list-style: none;
+}
+nav a {
+    box-shadow:  3px 3px 10px 2px rgb(39, 39, 39);
+    display: block;
+    text-decoration: none;
+    width: 120px;
+    height: auto;
+    font-size: 15px;
+    padding-bottom: 5%;
+    padding-top: 5%;
+}
+/*Para que la imagen se ilumine en verde, es decir su borde, le damos un atributo de target a la imagen
+para que si viene de un enlace se ilumine su marco en verde*/
+img:target{
+    box-shadow: 0px 0px 18px 10px green;
+}
+/*Para que el main se posicione bien con dichas imágenes hacemos un grid y además ponemos que las imágenes
+tengan un 98% de ancho para que el borde se vea*/
 main{
     grid-area: main;
     display: grid;
@@ -24,11 +49,13 @@ main{
 
 }
 img{
-    width:100%;
+    width:98%;
+    box-shadow: 0px 0px 5px 5px grey;
     
 }
 footer{
     grid-area: footer;
     text-align: center;
-    padding-top: 7%;
+    padding-top: 10%;
+    font-size: 15px;
 }
