@@ -1,24 +1,56 @@
 body{
 
-    background-color: grey;
+    background-color: lightcyan;
 
 }
 
-.rojo{
+
+
+.negro{
     width: 100%;
-    height:  100px;
-    background-color: red;
+    height:  70px;
+    background: url(./cesped.jpg) no-repeat center center;
+    background-size: auto;
 }
 
-
-.verde{
+.secreto{
     width: 100%;
-    height:  100px;
-    background-color: green;
+    height:  70px;
+    background-color: blue;
+}
+
+.pared{
+    width: 100%;
+    height:  70px;
+    background: url(./pared.jpg) center center;
+}
+
+.pisado{
+    background: url(./pisado.jpg) no-repeat center center;
+    background-size: auto;
+   
+}
+.momia{
+    width: 100%;
+    height:  70px;
+    background: url(./browser.png) center center;
 }
 
 .mapa{
+    padding-right: 10%;
+    padding-left: 10%;
+    width: 80%;
     display: grid;
     grid-template-columns: repeat(21,1fr);
-    grid-template-rows: repeat(13,1fr);
+    grid-template-rows: repeat(14,1fr);
+
+}
+
+.mario{
+    width: 100%;
+    height:  70px;
+    background: url(./mario.png) no-repeat center center;
+    background-size: auto;
+
+    
 }
