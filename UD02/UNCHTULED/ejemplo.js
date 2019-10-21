@@ -14,7 +14,7 @@ mapa =
         [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
         [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0]];
-
+marioVivo = true;
 
 function listo() {
 
@@ -22,7 +22,7 @@ function listo() {
         for (var j = 0; j < 21; j++) {
             var newDiv = document.createElement("div");
             if (mapa[i][j] == 0) {
-                newDiv.classList.add("negro");
+                newDiv.classList.add("cesped");
                 mapa[i][j] = newDiv;
             } else if (mapa[i][j] == 2) {
                 newDiv.classList.add("mario");
@@ -78,7 +78,7 @@ function teclado(evento) {
 
 function mover(x, y) {
 
-    if ((marioY >= 0) && (marioY < 21) && (marioX >= 0) && (marioX < 14) && (!(mapa[x][y].classList.value.includes("pared"))) && !(mapa[x][y].classList.value.includes("secreto"))) {
+    if (marioVivo && (marioY >= 0) && (marioY < 21) && (marioX >= 0) && (marioX < 14) && (!(mapa[x][y].classList.value.includes("pared"))) && !(mapa[x][y].classList.value.includes("secreto"))) {
 
         mapa[marioX][marioY].classList.remove("mario");
         mapa[marioX][marioY].classList.add("pisado");
@@ -171,7 +171,7 @@ function cambiarColumna(x, y) {
         for (var i = 1; i <= 3; i++) {
 
             mapa[x][y].classList.remove("pared");
-            mapa[x][y].classList.add("secreto");
+            mapa[x][y].classList.add(divSecretoRandom());
 
             y++;
         }
@@ -189,6 +189,8 @@ function moverMomia() {
 
     contador = 0;
 
+
+    
 
     if (Math.abs(momiaX - marioX) > Math.abs(momiaY - marioY)) {
         if (momiaX < marioX && (momiaX >= 0) && (momiaX < 14) && (!(mapa[x + 1][y].classList.value.includes("pared"))) && !(mapa[x + 1][y].classList.value.includes("secreto"))) {
@@ -220,6 +222,8 @@ function moverMomia() {
         }
     }
 
+
+
     if (hazX) {
 
 
@@ -245,5 +249,34 @@ function moverMomia() {
 
     }
 
+    if (momiaX == marioX && momiaY == marioY) {
+
+    mapa[momiaX][momiaY].classList.remove("momia");
+    mapa[momiaX][momiaY].classList.add("cesped");
+
+    momiaY = y;
+    momiaX = x;
+
+    marioVivo = false; /*esto se tendra que cambiar por vidas -- para que te reste vidas*/
+
+    mapa[marioX][marioY].classList.remove("mario"); /**/
+    
+
+    mapa[momiaX][momiaY].classList.remove("mario");
+    mapa[momiaX][momiaY].classList.add("momia");
+    
+    }
+
 }
 
+function divSecretoRandom(){
+
+    divSecreto = ["moneda","moneda","moneda","moneda","moneda","moneda","pergamino","momia","momia","llave","moneda","moneda","moneda","moneda"];
+
+    numeroRandom = Math.floor(Math.random() * divSecreto.length);
+
+    
+
+return divSecretoRandom[numeroRandom];
+
+}

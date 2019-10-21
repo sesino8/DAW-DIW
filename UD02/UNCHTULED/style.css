@@ -4,9 +4,25 @@ body{
 
 }
 
+.moneda{
+    width: 100%;
+    height:  70px;
+    background-color: yellow;
+}
 
+.pergamino{
+    width: 100%;
+    height:  70px;
+    background-color: red;
+}
 
-.negro{
+.llave{
+    width: 100%;
+    height:  70px;
+    background-color: blue;
+}
+
+.cesped{
     width: 100%;
     height:  70px;
     background: url(./cesped.jpg) no-repeat center center;
