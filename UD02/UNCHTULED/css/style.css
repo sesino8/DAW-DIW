@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+
+body{
+
+    background-color: lightcyan;
+    margin: 0px;
+    font-family: 'Press Start 2P';
+
+}
+
+.container{
+
+grid-area: container;
+}
+
+#titulo{
+    padding-top: 2%;
+    grid-area: titulo;
+}
+
+#scores{
+    margin: 5%;
+    grid-area: scores;
+    font-size: 12px;
+    width: 100%;
+}
+
+h1{
+    width: 100%;
+    height: 70px;
+    text-align: center;
+    margin: 0%;
+    padding: 0%;
+}
+
+.moneda{
+    width: 100%;
+    height:  35px;
+    content: url(../img/moneda.gif);
+    margin-top: -35%;
+}
+
+.pergamino{
+    width: 100%;
+    height:  35px;
+    content: url(../img/pergamino.png);
+    margin-top: -35%;
+
+}
+
+.llave{
+    width: 100%;
+    height:  35px;
+    content: url(../img/llave.png);
+    margin-top: -35%;
+
+}
+
+.peach{
+    width: 100%;
+    height:  35px;
+    content: url(../img/peach.png);
+    margin-top: -35%;
+
+}
+
+.cesped{
+    width: 100%;
+    height:  35px;
+    background: url(../img/cesped.jpg) no-repeat center center;
+    background-size: auto;
+}
+
+.pared{
+    width: 100%;
+    height:  35px;
+    background: url(../img/pared.jpg) center center
+}
+
+.pisado{
+    background: url(../img/pisado.jpg) no-repeat center center;
+    background-size: auto;
+   
+}
+.momia{
+    width: 100%;
+    height:  35px;
+    background: url(../img/browser.png) center center;
+}
+
+.momiaBloque{
+    width: 100%;
+    height:  35px;
+    content: url(../img/momiaBloque.png);
+    margin-top: -35%;
+
+}
+
+.mapa{
+    grid-area: mapa;
+    margin-right: 10%;
+    margin-left: 10%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(21,1fr);
+    grid-template-rows: repeat(14,1fr);
+    background: url(../img/pared.jpg) center center;
+}
+
+
+
+.mario{
+    width: 100%;
+    height:  35px;
+    background: url(../img/mario.png) no-repeat center center;
+    background-size: auto;
+
+    
+}
+
+#ayuda{
+    font-size:12px;
+    grid-area: ayuda;
+    margin: 5%;
+}
+
+ul{
+
+    list-style-type: none;
+}
+
+li{
+    display: block;
+}
+
+.pagina{
+
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "titulo titulo"
+                         "scores container"
+                          "ayuda ayuda";
+    }

@@ -1,17 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Uncthuled</title>
-    <style>@import url(./style.css);</style>
-    <script src="ejemplo.js"></script>
+    <title>Mario's mummy</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        @import url(./css/style.css);
+    </style>
+    <script src="./javascript/mario.js"></script>
+
 </head>
+
 <body>
-    <div class="container">
-    <div id="mapa" class="mapa">
-    </div> 
-</div>
+    <section class="pagina" id="pagina">
+
+        <div id="titulo">
+            <h1>Mario's mummy</h1>
+        </div>
+        <div id="scores" class="scores">
+            <a href="#ayuda" style="text-decoration: none; color: black;">Ayuda</a>
+        </div>
+
+        <div id="ayuda">
+                <p>Como podeis ver, Mario esta encerrado en un laberinto sin fin, niveles infinitos, por lo tanto debemos de
+                        intentar conseguir el máximo de monedas posibles avanzando por cada nivel y perdiendo el mínimo número
+                        de vidas. Para ello tendremos que rodear los bloques de piedra para poder ver lo que hay dentro. En
+                        ellos encontraremos: </p>
+        
+                        <ul>
+                                <li><img src="./img/momiaBloque.png" alt="" height="60px" width="60px"> <p>Tendrás que escapar de ella, sino te quitará una vida. Puede salirte en los bloques y aparecerá otra en el mismo lugar dónde tu apareciste.</p></li>
+                                <li><img src="./img/moneda.gif" alt="" height="60px" width="60px"><p>Cada una de ellas suma 50 en tus monedas.</p></li>
+                                <li><img src="./img/peach.png" alt="" height="60px" width="60px"><p>Tendrás que salvar a nuestra princesa Peach y coger la llave para poder pasar al siguiente nivel.</p></li>
+                                <li><img src="./img/llave.png" alt="" height="60px" width="60px"><p>La llave mencionada anteriormente.</p></li>
+                                <li><img src="./img/pergamino.png" alt="" height="60px" width="60px"><p>La estrella del super poder, hará que seas inmune y puedas matar una sola momia sin que te bajen las vidas.</p></li>
+                                <li><img src="./img/seta.png" alt="" height="60px" width="60px"><p>Muestra que has pasado ya por ahí.</p></li>
+                                <li><p>Si necesitas reiniciar el nivel después de leerte las instrucciones <a href="./index.html"> O </a></p></li>
+
+                                
+                        </ul>
+
+                    
+        </div>
+
+        <div class="container">
+            <div id="mapa" class="mapa">
+            </div>
+        </div>
+    </section>
 </body>
+
 </html>
