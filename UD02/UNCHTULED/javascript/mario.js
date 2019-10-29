@@ -4,6 +4,7 @@ vidas = 5;
 nivelPasado = false;
 nivel = 1;
 monedas = 0;
+var interval;
 
 function listo() {
 
@@ -22,27 +23,15 @@ function listo() {
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
             [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0]];
 
-
+    //No permitimos que los pergaminos se acumulen
     contadorPergaminos = 0;
 
+    //Array de divs que contiene nuestro juego, es decir de bloques que pueden aparecer
     divSecreto = ["moneda", "peach", "moneda", "moneda", "moneda", "moneda", "pergamino", "momia", "llave", "moneda", "moneda", "moneda", "moneda", "nada", "nada", "nada", "nada", "nada", "nada", "nada"];
-    if (nivel > 1) {
-        for (let i = 0; i < nivel; i++) {
 
-            var index = divSecreto.indexOf("moneda");
-
-            divSecreto[index] = "momia";
-        }
-
-
-    } else {
-
-        mapa[12][16] = 8;
-
-    }
-
+    // Recorre todas las posiciones y además va añadiendo los divs a cada posicion
     for (var i = 0; i < 14; i++) {
         for (var j = 0; j < 21; j++) {
             var newDiv = document.createElement("div");
@@ -76,22 +65,23 @@ function listo() {
         }
     }
 
+    //Añade al documento el listener del teclado y además añade parrafos para el cuenteo de vidas, nivel y monedas;
     document.addEventListener('keydown', teclado);
     interval = setInterval(mueveTodasLasMomias, 500);
     var para = document.createElement("p");
-    var node = document.createTextNode("Vidas : " + vidas);
+    var node = document.createTextNode("Vidas: " + vidas);
     para.appendChild(node);
     var element = document.getElementById("scores");
     element.appendChild(para);
 
     var para = document.createElement("p");
-    var node = document.createTextNode("Nivel : " + nivel);
+    var node = document.createTextNode("Nivel: " + nivel);
     para.appendChild(node);
     var element = document.getElementById("scores");
     element.appendChild(para);
 
     var para = document.createElement("p");
-    var node = document.createTextNode("Monedas : " + monedas);
+    var node = document.createTextNode("Coins: " + monedas);
     para.appendChild(node);
     var element = document.getElementById("scores");
     element.appendChild(para);
@@ -103,6 +93,7 @@ window.onload = function () {
     listo()
 };
 
+//Hace que al tocar la tecla interactue.
 function teclado(evento) {
 
     var key = evento.keyCode;
@@ -133,7 +124,7 @@ function mover(x, y) {
         }
 
         nivel++;
-        document.getElementsByTagName("p")[1].innerHTML = "Nivel : " + nivel;
+        document.getElementsByTagName("p")[1].innerHTML = "Nivel: " + nivel;
 
         nivelPasado = false;
 
@@ -145,15 +136,17 @@ function mover(x, y) {
         var node3 = document.getElementsByTagName("p")[0];
         list.removeChild(node3);
 
+        var el2 = document.getElementById('scores');
 
+        while (el2.firstChild) el2.removeChild(el2.firstChild);
 
-
+        clearInterval(interval);
 
         var el = document.getElementById('mapa');
 
         while (el.firstChild) el.removeChild(el.firstChild);
 
-        clearInterval(interval);
+
 
 
         listo();
@@ -286,10 +279,34 @@ function comprobarColumna(posicionX, posicionY) {
 function cambiarColumna(x, y) {
     constanteY = y;
     secreto = divSecretoRandom();
+    var elem;
 
     if (secreto == "moneda") {
         monedas += 50;
-        document.getElementsByTagName("p")[2].innerHTML = "Monedas : " + monedas;
+        document.getElementsByTagName("p")[2].innerHTML = "Coins: " + monedas;
+    } else if (secreto == "llave") {
+
+        var elem = document.createElement("img");
+        elem.setAttribute("src", "./img/llave.png");
+        elem.setAttribute("height", "50");
+        elem.setAttribute("width", "50");
+        document.getElementById("scores").appendChild(elem);
+
+    } else if (secreto == "pergamino") {
+
+        var elem = document.createElement("img");
+        elem.setAttribute("src", "./img/pergamino.png");
+        elem.setAttribute("height", "50");
+        elem.setAttribute("width", "50");
+        document.getElementById("scores").appendChild(elem);
+
+    } else if (secreto == "peach") {
+        var elem = document.createElement("img");
+        elem.setAttribute("src", "./img/peach.png");
+        elem.setAttribute("height", "50");
+        elem.setAttribute("width", "50");
+        document.getElementById("scores").appendChild(elem);
+
     }
 
     for (var j = 2; j <= 3; j++) {
@@ -461,7 +478,7 @@ function mueveTodasLasMomias() {
 
 function mostrarVidas(vidas) {
 
-    document.getElementsByTagName("p")[0].innerHTML = "Vidas : " + vidas;
+    document.getElementsByTagName("p")[0].innerHTML = "Vidas: " + vidas;
 
 
 }
@@ -479,25 +496,42 @@ function gameOver() {
     marioVivo = false;
 
     var para = document.createElement("p");
-    var node = document.createTextNode("Hemos pasado un buen rato, para jugar otra vez tendrás que recargar la página");
+    var node = document.createTextNode("Pulsa para volver a jugar!");
     para.appendChild(node);
     var element = document.getElementById("scores");
     element.appendChild(para);
 
-
-    /* var x = document.createElement("INPUT");
-    x.setAttribute("type", "text");
-    element.appendChild(x);
-
-    puntos = document.getElementsByTagName("input").value;
+    var a = document.createElement('a');
+    a.setAttribute('href', '../index.html');
+    a.innerHTML = "JUGAR!";
+    var element = document.getElementById("scores");
+    element.appendChild(a);
     
-    const fs = require('fs');
 
-    fs.writeFile('records.txt', puntos, (err) => {
 
-        if (err) throw err;
-    }); */
 
+    //setTimeout(record, 2000);
 
 }
 
+
+
+/* function record() {
+
+    var person = prompt("Guarda tú record con el nombre!", "Ej. Toni");
+    function WriteFile() {
+
+        var fh = fopen("../MyFile.txt", 3); // Open the file for writing
+
+        if (fh != -1) // If the file has been successfully opened
+        {
+            var str = person;
+            fwrite(fh, str); // Write the string to a file
+            fclose(fh); // Close the file
+        }
+
+    }
+
+    WriteFile();
+}
+ */
