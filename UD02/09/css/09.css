@@ -1,0 +1,54 @@
+body{
+
+    background: url("../img/braum.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+}
+
+.keys{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        width: 100%;
+        text-align: center;
+        margin: 10% 0;
+        min-height: 200px;
+        align-items: center;
+        height: 400px;
+}
+
+.key{
+    display: block;
+    border: solid 5px;
+    height: 100px;
+    width: 100px;
+    margin: 2%;
+    background-color: rgba(255, 255, 255, 0.35);
+    transition: all 0.1s;
+}
+
+span{
+
+color: yellow;
+text-shadow: 0px 0px 5px #000000;
+font-size: 20px;
+text-transform: uppercase;
+
+}
+
+kbd{
+    margin: 15px;
+    color: white;
+    text-shadow: 0px 0px 5px #000000;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+
+.reproduciendo{
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px yellow;
+}
