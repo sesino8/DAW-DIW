@@ -1,0 +1,52 @@
+section:first-child{
+    height: 50px;
+    width: 300px;
+    border: 1px dotted;
+    border-radius: 10px;
+
+}
+
+section {
+    height: 100px;
+    width: 300px;
+    border: 1px dotted;
+    border-radius: 10px;
+}
+
+
+.caja {
+    content: url(../cthulhu.svg);
+    height: 30px;
+    width: 30px;
+}
+
+button {
+    background-color: rgb(207, 207, 207);
+    border-radius: 10px;
+    width: 50%;
+    height: 100%;
+}
+
+.linear {
+    transition: transform cubic-bezier(0.250, 0.250, 0.750, 0.750) 3s;
+}
+
+.ease {
+    transition: transform cubic-bezier(0.250, 0.100, 0.250, 1.000) 3s;
+}
+
+.ease-in {
+    transition: transform cubic-bezier(0.420, 0.000, 1.000, 1.000) 3s;
+}
+
+.ease-out {
+    transition: transform cubic-bezier(0.000, 0.000, 0.580, 1.000) 3s;
+}
+
+.ease-in-out {
+    transition: transform cubic-bezier(0.420, 0.000, 0.580, 1.000) 3s;
+}
+
+.transition {
+  transform: translateX(300px) translateX(-100%);
+}
