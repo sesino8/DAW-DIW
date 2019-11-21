@@ -136,6 +136,13 @@ steps * {
 progress {
     background-color: white;
     border: 1px solid blue;
+    width: 100%;
+    
+}
+
+::-webkit-progress-value {
+    background-color: white;
+    transition: 3s;
 }
 
 finalmsg {

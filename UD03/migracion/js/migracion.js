@@ -16,8 +16,20 @@ FUNCIONES PERDIDAS
 
 function startMigration(){
 
-    // Fragmentos perdidos
-    // ^(;,;)^
+    
+var p = document.querySelectorAll('progress'); 
+
+for (let j = 0; j < p.length; j++) {
+for (let index = 1; index <= 10; index++) {
+
+    val = index * 10; 
+    p[j].setAttribute('value', val);
+    
+}
+}
+
+
+
 }
 
 function init(){
