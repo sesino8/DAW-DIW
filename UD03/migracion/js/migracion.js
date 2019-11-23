@@ -25,14 +25,14 @@ function startMigration() {
         hijosPasos[index].addEventListener("transitionend", transicionar);
 
     }
-    hijosPasos[0].style.opacity = "0";
 
 
     hijosPasos[0].style.visibility = "visible";
-
+    hijosPasos[0].classList.add("neon");
     hijosPasos[0].style.opacity = "1";
-
     
+
+
 }
 
 
@@ -42,31 +42,35 @@ var num;
 function transicionar(p) {
 
     if (contador > 0) {
-        
-    }else{
+
+    } else {
         num = this.getAttribute("data-step");
-        hijoSiguiente = parseInt(num) ;
+        hijoSiguiente = parseInt(num);
     }
 
     console.log(num);
     hijosPasos[hijoSiguiente].style.visibility = "visible";
-    hijosPasos[hijoSiguiente].style.opacity = "1";
 
-    
-    if (num == 0 || num % 3 == 0) {       
 
-      
-        
-    }else if(num == 1 || num % 3 == 1){
+
+    if (num == 0 || num % 3 == 0) {
+
+        hijosPasos[hijoSiguiente].style.opacity = "1";
+
+
+    } else if (num == 1 || num % 3 == 1) {
+
         if (hijosPasos[hijoSiguiente].getAttribute("value") < 100) {
             contador = contador + 10;
             hijosPasos[hijoSiguiente].setAttribute('value', contador);
             transicionar(this);
-        }else{
+        } else {
             contador = 0;
         }
 
-    }else{
+    } else {
+
+        hijosPasos[hijoSiguiente].classList.add('blink');
 
     }
 

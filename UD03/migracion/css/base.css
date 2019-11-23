@@ -104,6 +104,9 @@ steps {
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(6,1fr);
+    justify-items: center;
+    align-items: center;
+
 }
 
 /*
@@ -114,8 +117,7 @@ steps {
 */
 
 steps * {
-    transition: 7s ;
-    opacity: 0;
+    transition: 5s ;
     visibility: hidden;
 }
 
@@ -133,12 +135,13 @@ progress {
     background-color: white;
     border: 1px solid blue;
     width: 100%;
+    height: 80%;
     
 }
 
 ::-webkit-progress-value {
     background-color: white;
-    transition: 7s;
+    transition: 5s;
 }
 
 finalmsg {
@@ -149,13 +152,16 @@ finalmsg {
 }
 
 .neon {
-    animation: neon ease 0.5s; 
+    animation: neon ease 2s; 
   }
 
 @keyframes neon {
     0% {
         opacity: 0;
         transform: translateY(50px);
+    }
+    30% {
+        opacity: 0.5;
     }
 
       100% {
@@ -165,12 +171,13 @@ finalmsg {
 }
 
 .blink {
-    animation: blinker 2s linear infinite;
+    animation: blinker 3s linear infinite;
+    opacity: 0;
   }
   
   @keyframes blinker {
     50% {
-      opacity: 0;
+      opacity: 1;
     }
   }
 
