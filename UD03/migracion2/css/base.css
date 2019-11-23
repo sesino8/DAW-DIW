@@ -1,0 +1,179 @@
+/*
+CSS Base for the Miskatonic Herald
+*/
+
+@font-face {
+    font-family: neon;
+    src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+}
+
+/*
+* CSS for body
+*/
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    /* background-color:#323232; */
+    background-image: url("https://picsum.photos/1920/1080");
+    font-family: 'OuroborosRegular';
+    font-weight: normal;
+    font-style: normal;
+    margin: 0;
+    color: #ffffff;
+}
+
+/*
+* CSS for items
+*/
+
+content {
+    width: 50%;
+    height: auto;
+    background-color: grey;
+    padding: 2%;
+}
+
+items {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 100px 1fr;
+    grid-template-areas: "titulo" "boton" "steps";
+    text-align: center;
+    /* 
+     * Fragmentos perdidos 
+     * ^(;,;)^
+     */
+}
+
+item {
+    /* 
+     * Fragmentos perdidos 
+     * ^(;,;)^
+     */
+}
+
+/*
+* CSS for body
+*/
+
+button {
+    background: rgba(203, 96, 179, 1);
+    background: -moz-linear-gradient(left, rgba(203, 96, 179, 1) 0%, rgba(168, 0, 119, 1) 51%, rgba(219, 54, 164, 1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(203, 96, 179, 1)), color-stop(51%, rgba(168, 0, 119, 1)), color-stop(100%, rgba(219, 54, 164, 1)));
+    background: -webkit-linear-gradient(left, rgba(203, 96, 179, 1) 0%, rgba(168, 0, 119, 1) 51%, rgba(219, 54, 164, 1) 100%);
+    background: -o-linear-gradient(left, rgba(203, 96, 179, 1) 0%, rgba(168, 0, 119, 1) 51%, rgba(219, 54, 164, 1) 100%);
+    background: -ms-linear-gradient(left, rgba(203, 96, 179, 1) 0%, rgba(168, 0, 119, 1) 51%, rgba(219, 54, 164, 1) 100%);
+    background: linear-gradient(to right, rgba(203, 96, 179, 1) 0%, rgba(168, 0, 119, 1) 51%, rgba(219, 54, 164, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cb60b3', endColorstr='#db36a4', GradientType=1);
+    
+    width: 70%;
+    height: 60px;
+    border-radius: 5px;
+    border: 1px solid white;
+    font-family: inherit;
+    color: white;
+    font-size: 2em;
+
+}
+
+button:hover {
+    /* 
+     * Fragmentos perdidos 
+     * ^(;,;)^
+     */
+}
+
+button:active {
+    /* 
+     * Fragmentos perdidos 
+     * ^(;,;)^
+     */
+}
+
+/*
+* CSS for steps
+* - Includes the opacity for the 
+*   animation that makes this more
+*   dinamyc, but is only a simple
+*   GUI.
+*/
+
+steps {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(6,1fr);
+    justify-items: center;
+    align-items: center;
+
+}
+
+/*
+* CSS for all the steps
+* with class (estabaEscondido)
+* that turns the element visible
+* with a transition.
+*/
+
+steps * {
+    transition: 3.5s ;
+    visibility: hidden;
+}
+
+.estabaEscondido {
+    visibility: visible;
+}
+
+/*Progress*/
+
+/*
+* CSS for ProgressBars
+*/
+
+.gif{
+    width: 80px;
+    height: 50px;
+    background: url(../imagen/giphy2.gif);
+}
+
+finalmsg {
+    
+color: yellow;
+text-shadow: 0px 0px 13px rgba(255,0,0,1);
+font-size: 15px;
+}
+
+
+.neon {
+    animation: neon ease 3.5s; 
+    
+  }
+
+@keyframes neon {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    30% {
+        opacity: 0.5;
+    }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+}
+
+.blink {
+    animation: blinker 3.5s linear infinite;
+    opacity: 0;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 1;
+    }
+  }
+
