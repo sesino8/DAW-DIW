@@ -114,17 +114,13 @@ steps {
 */
 
 steps * {
-    /* 
-     * Fragmentos perdidos 
-     * ^(;,;)^
-     */
+    transition: 7s ;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .estabaEscondido {
-    /* 
-     * Fragmentos perdidos 
-     * ^(;,;)^
-     */
+    visibility: visible;
 }
 
 /*Progress*/
@@ -142,7 +138,7 @@ progress {
 
 ::-webkit-progress-value {
     background-color: white;
-    transition: 3s;
+    transition: 7s;
 }
 
 finalmsg {
@@ -152,10 +148,29 @@ finalmsg {
      */
 }
 
+.neon {
+    animation: neon ease 0.5s; 
+  }
+
 @keyframes neon {
-    /* 
-     * Fragmentos perdidos 
-     * ^(;,;)^
-     */
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
 }
+
+.blink {
+    animation: blinker 2s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
 
