@@ -29,7 +29,6 @@ function startMigration() {
 
     hijosPasos[0].style.visibility = "visible";
     hijosPasos[0].classList.add("neon");
-    hijosPasos[0].style.opacity = "1";
     
 
 
@@ -55,6 +54,7 @@ function transicionar(p) {
 
     if (num == 0 || num % 3 == 0) {
 
+        hijosPasos[hijoSiguiente].classList.add("neon");
         hijosPasos[hijoSiguiente].style.opacity = "1";
 
 
