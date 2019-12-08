@@ -118,7 +118,7 @@ steps {
 */
 
 steps * {
-    transition: 5s ;
+    transition: 1.5s ;
     visibility: hidden;
 }
 
@@ -143,7 +143,7 @@ progress {
 
 ::-webkit-progress-value {
     background-color: blue;
-    transition: ease-in-out 5s;
+    transition: ease-in-out 1s;
     border-radius: 5px;
 }
 
@@ -156,7 +156,7 @@ font-size: 15px;
 
 
 .neon {
-    animation: neon ease 3s; 
+    animation: neon ease 1s; 
     
   }
 
@@ -176,7 +176,7 @@ font-size: 15px;
 }
 
 .blink {
-    animation: blinker 3s linear infinite;
+    animation: blinker 1s linear infinite;
     opacity: 0;
   }
   
