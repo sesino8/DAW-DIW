@@ -1,36 +1,56 @@
 <!doctype html>
 <html>
-  <head lang="es" dir="ltr">
-   <meta http-equiv="content-type" content="text/html; utf-8">
-    <title>Datos Abiertos con NodeJS</title>
 
-    <meta name="description" content="Nuestro NodeJS">
-    <meta name="keywords" content="html nodejs">
+<head lang="es" dir="ltr">
+  <meta charset="utf-8">
+  <title>Datos Abiertos con NodeJS</title>
 
-    <script src="js/buscar.js"></script>
+  <meta name="description" content="Nuestro NodeJS">
+  <meta name="keywords" content="html nodejs">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+  <script src="../Proj4Leaflet-leaflet-proj-refactor/lib/proj4-compressed.js"></script>
+  <script src="../Proj4Leaflet/src/proj4leaflet.js"></script>
+
+  <script src="js/buscar.js"></script>
+
+  <style>
+    @import url("css/busqueda.css");
+  </style>
+
+</head>
+
+<body>
+
+  <h1> Fallas </h1>
+
+  <div class="busqueda">
+
+
+    <form method="POST" action="/puntuaciones">
+
+      <input type="text" name="idFalla">
+      <input type="text" name="ip">
+      <input type="text" name="puntuacion">
+
+      <input type="submit">
+    </form>
+
+    <form id="busquedaform">
+      <input type="text" name="nombre">
+      <input type="button" value="Buscar">
+    </form>
+  </div>
+
+  <div class="resultados">
     
-    <style>
-      @import url("css/busqueda.css");
-    </style>
+  </div>
 
-  </head>
-  
-  <body>
-    
-    <h1> [ Open Data ] - Calles con Reloj y termómetro </h1>
 
-    <div class="busqueda">
-      <form id="busquedaform">
-	<input type="text" name="nombre">
-	<input type="button" value="Buscar">
-      </form>
-    </div>
+</body>
 
-    <div class="resultados">
-      
-    </div>
-    
-    
-  </body>
 </html>
-
