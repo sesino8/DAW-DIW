@@ -1,9 +1,25 @@
 const urlFallas = "http://mapas.valencia.es/lanzadera/opendata/Monumentos_falleros/JSON";
 
+function Falla (propiedades,geometria){
+
+	this.propiedades = propiedades;
+	this.geometria = geometria;
+
+}
 
 function filtroLetra(elemento){
     let letra=document.querySelector(`input[name="nombre"]`).value;
     return elemento.properties.nombre.startsWith(letra);
+}
+
+function init(){
+
+	document.querySelector(`input[type="button"]`).addEventListener("click",buscar);    
+	
+	mapaDeFallas = new Map();
+
+	
+    
 }
 
 function buscar(){
@@ -14,14 +30,7 @@ function buscar(){
     }).then(respuesta =>{
 	const resultado=respuesta.features;
 
-	var mapaDeFallas = new Map();
-
-	function Falla (propiedades,geometria){
-
-		this.propiedades = propiedades;
-		this.geometria = geometria;
-
-	}
+	
 
 	let listado=document.querySelector(".resultados");
 
@@ -74,13 +83,8 @@ function valoracion(idFalla, valoracion){
 
 function colorEstrellaPulsada(ev,index) {
 
-	console.log(ev);
-
-	console.log(estrellas);
-
-	var boton = ev;
-
-	var estrellas = document.querySelectorAll(`[  data-falla-id = '${boton.data.fallaId}' ]`);
+	var estrellas = document.querySelectorAll(`[  data-falla-id = '${ev.dataset.fallaId}' ]`);
+	var index = ev.dataset.index;
 
 	if (estrellas[0].style.color == "yellow") {
 		for (let i = 0; i < 5;i++) {
@@ -95,17 +99,9 @@ function colorEstrellaPulsada(ev,index) {
 		
 	}
 	
-	
-	
-
-	console.log(index)
 }
 
-function init(){
 
-    document.querySelector(`input[type="button"]`).addEventListener("click",buscar);    
-    //document.querySelector(`input[type="text"]`).addEventListener("input",toUpp);
-}
 
 function buscarUbicacion(){
 
