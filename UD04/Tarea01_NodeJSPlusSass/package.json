@@ -18,10 +18,11 @@
     "express": "^4.17.1",
     "leaflet": "^1.6.0",
     "mongodb": "^3.4.0",
-    "mongoose": "^5.8.0",
-    "node-sass": "^4.13.0"
+    "mongoose": "^5.8.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "node-sass": "^4.13.0",
+    "nodemon": "^2.0.2",
+    "sass": "^1.24.0"
   }
 }
