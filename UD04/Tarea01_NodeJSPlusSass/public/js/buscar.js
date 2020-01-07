@@ -19,31 +19,26 @@ function init(){
 	mapaDeFallas = new Map();
 
 	
-    
-}
-
-function buscar(){
-
     const fetchPromesa = fetch(urlFallas);
     fetchPromesa.then(response => {
 	return response.json();
     }).then(respuesta =>{
 	const resultado=respuesta.features;
 
-	
-
-	let listado=document.querySelector(".resultados");
-
 	resultado.forEach(falla=>{
 
 		mapaDeFallas.set(falla.properties.id,new Falla(falla.properties,falla.geometry));
-		
+
+		let listado=document.querySelector(".resultados");
+
+			
 		let celdaResultado = document.createElement("div");
 		celdaResultado.classList.add("celdas");
+		celdaResultado.setAttribute("data-idfalla", falla.properties.id)
 		let resultadoFallas = document.createElement("p");
 		resultadoFallas.innerText = falla.properties.nombre;
 		let imagenFalla = document.createElement("img");
-		imagenFalla.src = falla.properties.boceto_i;
+		imagenFalla.src = falla.properties.boceto; // Quedan hacer cosas aqui
 
 		celdaResultado.appendChild(resultadoFallas);
 		celdaResultado.appendChild(imagenFalla);
@@ -62,14 +57,46 @@ function buscar(){
 				valoracion.appendChild(estrella); 
 		}
 		celdaResultado.appendChild(valoracion);
-	    listado.appendChild(celdaResultado);	    
-	});
+		let ubicacion = document.createElement("button");
+		ubicacion.innerText = "Ubicación";
+		ubicacion.onclick = function() { buscarUbicacion(falla.geometry.coordinates,falla.properties.boceto); };
+		ubicacion.classList.add("bntUbicacion");
+		celdaResultado.appendChild(ubicacion);
+	    listado.appendChild(celdaResultado);
 
-	
 	});
-	
-	//proj4.defs('EPSG:25830', '+proj=utm +zone=30 +ellps=GRS80 +units=m +no_defs');
+});
 
+console.log(mapaDeFallas);
+
+
+}
+
+
+function buscar(){
+
+	let imagenes = document.querySelectorAll("img");
+	let celdas = document.querySelectorAll('div.celdas');
+	let idFallas = new Array;
+
+	for (let index = 0; index < celdas.length; index++) {
+		idFallas[index]= celdas[index].getAttribute("data-idfalla");
+		
+	}
+
+	if (document.getElementById("boceto_i").checked) {
+		for (let index = 0; index < imagenes.length; index++) {
+			let falla = mapaDeFallas.get(idFallas[index]);
+			imagenes[index].src = falla.propiedades.boceto_i;
+			
+		}
+	} else {
+		for (let index = 0; index < imagenes.length; index++) {
+			let falla = mapaDeFallas.get(idFallas[index]);
+			imagenes[index].src = falla.propiedades.boceto;
+			
+		}
+	}
 
 }
 
@@ -103,26 +130,37 @@ function colorEstrellaPulsada(ev,index) {
 
 
 
-function buscarUbicacion(){
+function buscarUbicacion(coordenadas,urlImagen){
+	let coordenadasMapa = getWGSCoordinates(coordenadas);
+
+	var map = L.map('mapa').setView([coordenadasMapa[0], coordenadasMapa[1]], 16);
+	let tilerMapUrl = 'https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=FeZF25xvZUuP463NS59g';
+        L.tileLayer(tilerMapUrl, {
+            attribution: 'Map data © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, Imagery © <a href="http://www.kartena.se/">Kartena</a>',
+		}).addTo(map);
+		
+
+	/* var imagenFalla = L.icon({
+		iconUrl: urlImagen,
+	
+		iconSize:     [50, 50], // size of the icon
+		iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+		popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+	}); */
+
+	L.marker(coordenadasMapa).addTo(map);
 
 
-	var geojson = {
-		'type': 'Feature',
-		'geometry': {
-		  'type': 'Point',
-		  'coordinates': [275815,4538291],
-		},
-		'properties': {
-		  'name': 'Plaza Mayor de Salamanca'
-		},
-		'crs': {
-		  'type': 'name',
-		  'properties': {
-			  'name': 'urn:ogc:def:crs:EPSG::25830'
-			}
-		  }
-		};
+}
 
+function getWGSCoordinates(coordenadas) {
+        
+	// Cambiar la proyeccion de la referencia espacial 25830 a 4326
+	let firstProjection  = '+proj=utm +zone=30 +ellps=GRS80 +units=m +no_defs';
+	let secondProjection = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs';
+	coordenadas = proj4(firstProjection, secondProjection, coordenadas);
+
+	return [coordenadas[1], coordenadas[0]];
 }
 
 

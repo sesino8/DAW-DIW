@@ -10,7 +10,7 @@ body {
 %fuente-basica {
   border: 1px solid grey;
   padding: 10px;
-  border-radius: 9px;
+  border-radius: 10px;
   color: $font-color;
 }
 
@@ -26,7 +26,7 @@ body {
     margin: 2%;
     height: 450px;
     border-bottom: 0 none;
-	  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
 
     p {
       font-size: 12px;
@@ -43,35 +43,43 @@ body {
       height: 300px;
     }
 
-    .valoracion{
+    .valoracion {
       text-align: center;
       padding: 3%;
 
-      .estrellas{
+      .estrellas {
         border: none;
         text-decoration: none;
         font-size: 20px;
-        background-color: white;
+        background-color: $primary-color;
         cursor: pointer;
-        outline: white;
-        
+        outline: $primary-color;
       }
-      .estrellas:focus{
+      .estrellas:focus {
         box-shadow: none;
-        outline: white;
+        outline: $primary-color;
         border: none;
-        
-        
       }
-
-      
     }
 
-    .ubicacion {
-    }
+    .bntUbicacion {
+      border-radius: 10px;
+      background-color: grey;
+      width: 70%;
+      height: 10%;
+      margin-left: 15%;
+      margin-right: 15%;
 
-    #mapid {
-      height: 200px;
     }
   }
+}
+
+#mapa {
+  position: fixed;
+  width: 500px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px; /* Negative half of height. */
+  margin-left: -250px; /* Negative half of width. */
 }
