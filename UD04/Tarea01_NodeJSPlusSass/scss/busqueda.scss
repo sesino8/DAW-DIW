@@ -13,10 +13,24 @@ body {
   border-radius: 10px;
   color: $font-color;
 }
+h1 {
+  text-align: center;
+}
+
+#secciones{
+  width: 20%;
+  text-align: center;
+  align-items: center;
+}
+
+form {
+  text-align: center;
+  margin: 2%;
+}
 
 .resultados {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
   margin-left: 5%;
   margin-right: 5%;
   column-gap: 2%;
@@ -24,7 +38,7 @@ body {
   .celdas {
     width: 98%;
     margin: 2%;
-    height: 450px;
+    height: 500px;
     border-bottom: 0 none;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
 
@@ -35,6 +49,8 @@ body {
     }
 
     img {
+      padding-top: 2%;
+      padding-bottom: 2%;
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -76,10 +92,17 @@ body {
 
 #mapa {
   position: fixed;
-  width: 500px;
-  height: 300px;
-  top: 50%;
-  left: 50%;
-  margin-top: -100px; /* Negative half of height. */
-  margin-left: -250px; /* Negative half of width. */
+  width: 80%;
+  height: 60%;
+  top: 30%;
+  left: 30%;
+  margin-top: -5%; /* Negative half of height. */
+  margin-left: -20%; /* Negative half of width. */
+  border: 1px solid black;
+  visibility: hidden;
+}
+
+.popUpMapa *{
+  width: 100px;
+  height: 100px;
 }

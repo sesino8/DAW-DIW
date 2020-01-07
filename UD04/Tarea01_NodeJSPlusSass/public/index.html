@@ -22,25 +22,33 @@
   <h1> Fallas </h1>
 
   <div class="busqueda">
+    
 
 
-    <form method="POST" action="/puntuaciones">
+    <!-- <form method="POST" action="/puntuaciones">
 
       <input type="text" name="idFalla">
       <input type="text" name="ip">
       <input type="text" name="puntuacion">
 
       <input type="submit">
-    </form>
+    </form> -->
 
     <form id="busquedaform">
-      <input type="text" name="nombre">
+      <select id="secciones" name="select">
+        <option>Todas</option>
+      </select>
       <input type="button" value="Buscar">
     </form>
 
     <form name="imagenFalla">
-      <input type="radio" name="radio" id="boceto_i" value="boceto_i"> Infantil<br>
-      <input type="radio" name="radio" id="boceto" value="boceto"> Falla Mayor<br>
+      <input type="radio" name="radio" id="boceto" checked="checked" value="boceto_i"> Falla Mayor</input>
+      <input type="radio" name="radio" id="boceto_i" value="boceto">Infantil</input><br>
+    </form>
+
+    <form name="ano">
+      <input type="text" id="anoInicio"></input>
+      <input type="text" id="anoFinal"></input>
     </form>
   </div>
 

@@ -1,144 +1,165 @@
 const urlFallas = "http://mapas.valencia.es/lanzadera/opendata/Monumentos_falleros/JSON";
+var secciones = new Array;
 
-function Falla (propiedades,geometria){
-
-	this.propiedades = propiedades;
-	this.geometria = geometria;
-
+function filtroLetra(elemento) {
+	let letra = document.querySelector(`input[name="nombre"]`).value;
+	return elemento.properties.nombre.startsWith(letra);
 }
 
-function filtroLetra(elemento){
-    let letra=document.querySelector(`input[name="nombre"]`).value;
-    return elemento.properties.nombre.startsWith(letra);
-}
+function init() {
 
-function init(){
+	document.querySelector(`input[type="button"]`).addEventListener("click", buscar);
 
-	document.querySelector(`input[type="button"]`).addEventListener("click",buscar);    
-	
 	mapaDeFallas = new Map();
 
-	
-    const fetchPromesa = fetch(urlFallas);
-    fetchPromesa.then(response => {
-	return response.json();
-    }).then(respuesta =>{
-	const resultado=respuesta.features;
 
-	resultado.forEach(falla=>{
+	const fetchPromesa = fetch(urlFallas);
+	fetchPromesa.then(response => {
+		return response.json();
+	}).then(respuesta => {
+		const resultado = respuesta.features;
 
-		mapaDeFallas.set(falla.properties.id,new Falla(falla.properties,falla.geometry));
+		resultado.forEach(falla => {
 
-		let listado=document.querySelector(".resultados");
+			if (secciones.includes(falla.properties.seccion) === false) secciones.push(falla.properties.seccion);
+			if (secciones.includes(falla.properties.seccion_i) === false) secciones.push(falla.properties.seccion_i);
 
-			
-		let celdaResultado = document.createElement("div");
-		celdaResultado.classList.add("celdas");
-		celdaResultado.setAttribute("data-idfalla", falla.properties.id)
-		let resultadoFallas = document.createElement("p");
-		resultadoFallas.innerText = falla.properties.nombre;
-		let imagenFalla = document.createElement("img");
-		imagenFalla.src = falla.properties.boceto; // Quedan hacer cosas aqui
-
-		celdaResultado.appendChild(resultadoFallas);
-		celdaResultado.appendChild(imagenFalla);
-		let valoracion = document.createElement("div");
-		valoracion.classList.add("valoracion");
-		for (let index = 1; index <= 5; index++) {
-			let estrella = document.createElement("button");
-				estrella.addEventListener("click", function(){
-					colorEstrellaPulsada(this,index);
-				});
-				estrella.innerText = '★ ';
-				estrella.dataset.index=index;
-				estrella.dataset.fallaId=falla.properties.id;
-				estrella.setAttribute("value", index)
-				estrella.classList.add("estrellas");
-				valoracion.appendChild(estrella); 
-		}
-		celdaResultado.appendChild(valoracion);
-		let ubicacion = document.createElement("button");
-		ubicacion.innerText = "Ubicación";
-		ubicacion.onclick = function() { buscarUbicacion(falla.geometry.coordinates,falla.properties.boceto); };
-		ubicacion.classList.add("bntUbicacion");
-		celdaResultado.appendChild(ubicacion);
-	    listado.appendChild(celdaResultado);
-
+		});
+		cargarSecciones();
 	});
-});
-
-console.log(mapaDeFallas);
-
 
 }
 
-
-function buscar(){
-
-	let imagenes = document.querySelectorAll("img");
-	let celdas = document.querySelectorAll('div.celdas');
-	let idFallas = new Array;
-
-	for (let index = 0; index < celdas.length; index++) {
-		idFallas[index]= celdas[index].getAttribute("data-idfalla");
-		
+function cargarSecciones() {
+	let divSecciones = document.getElementById("secciones");
+	for (let index = 0; index < secciones.length; index++) {
+		var option = document.createElement("option");
+		option.text = secciones[index];
+		divSecciones.add(option);
 	}
+}
 
-	if (document.getElementById("boceto_i").checked) {
-		for (let index = 0; index < imagenes.length; index++) {
-			let falla = mapaDeFallas.get(idFallas[index]);
-			imagenes[index].src = falla.propiedades.boceto_i;
-			
-		}
-	} else {
-		for (let index = 0; index < imagenes.length; index++) {
-			let falla = mapaDeFallas.get(idFallas[index]);
-			imagenes[index].src = falla.propiedades.boceto;
-			
-		}
-	}
+function buscar() {
+	sector = document.getElementById("secciones");
+	seccionAComprobar = sector.options[sector.selectedIndex].value;
+	let listado = document.querySelector(".resultados");
+	listado.innerText = "";
+
+	const fetchPromesa = fetch(urlFallas);
+	fetchPromesa.then(response => {
+		return response.json();
+	}).then(respuesta => {
+		const resultado = respuesta.features;
+
+		resultado.forEach(falla => {
+
+			if (document.getElementById("boceto_i").checked) {
+				fallaAComprobar = falla.properties.boceto_i;
+				seccionBuena = falla.properties.seccion_i;
+			} else if (document.getElementById("boceto").checked) {
+				fallaAComprobar = falla.properties.boceto;
+				seccionBuena = falla.properties.seccion;
+			} else {
+				fallaAComprobar = falla.properties.boceto;
+				seccionBuena = falla.properties.seccion;
+			}
+
+
+			if (seccionBuena == seccionAComprobar || seccionAComprobar == "Todas") {
+
+				let celdaResultado = document.createElement("div");
+				celdaResultado.classList.add("celdas");
+				celdaResultado.setAttribute("data-idfalla", falla.properties.id)
+				let resultadoFallas = document.createElement("p");
+				resultadoFallas.innerText = falla.properties.nombre;
+				let imagenFalla = document.createElement("img");
+				imagenFalla.src = fallaAComprobar; // Quedan hacer cosas aqui
+
+				celdaResultado.appendChild(resultadoFallas);
+				celdaResultado.appendChild(imagenFalla);
+				let valoracion = document.createElement("div");
+				valoracion.classList.add("valoracion");
+				for (let index = 1; index <= 5; index++) {
+					let estrella = document.createElement("button");
+					estrella.addEventListener("click", function () {
+						colorEstrellaPulsada(this, index);
+					});
+					estrella.innerText = '★ ';
+					estrella.dataset.index = index;
+					estrella.dataset.fallaId = falla.properties.id;
+					estrella.setAttribute("value", index)
+					estrella.classList.add("estrellas");
+					valoracion.appendChild(estrella);
+				}
+				celdaResultado.appendChild(valoracion);
+				let ubicacion = document.createElement("button");
+				ubicacion.innerText = "Ubicación";
+				ubicacion.onclick = function () { buscarUbicacion(falla.geometry.coordinates, falla.properties.boceto); };
+				ubicacion.classList.add("bntUbicacion");
+				celdaResultado.appendChild(ubicacion);
+				listado.appendChild(celdaResultado);
+
+			}
+		});
+	});
+}
+
+function valoracion(idFalla, valoracion) {
+
+
+
+
 
 }
 
-function valoracion(idFalla, valoracion){
-
-
-
-
-
-}
-
-function colorEstrellaPulsada(ev,index) {
+function colorEstrellaPulsada(ev, index) {
 
 	var estrellas = document.querySelectorAll(`[  data-falla-id = '${ev.dataset.fallaId}' ]`);
 	var index = ev.dataset.index;
 
 	if (estrellas[0].style.color == "yellow") {
-		for (let i = 0; i < 5;i++) {
+		for (let i = 0; i < 5; i++) {
 			estrellas[i].style.color = "black";
-			
 		}
-		
-	} 
-
-	for (let i = 0; i < index ;i++) {
-		estrellas[i].style.color = "yellow";
-		
 	}
-	
+
+	for (let i = 0; i < index; i++) {
+		estrellas[i].style.color = "yellow";
+	}
 }
 
 
 
-function buscarUbicacion(coordenadas,urlImagen){
+function buscarUbicacion(coordenadas, urlImagen) {
+
+
+	mapaContainer = document.getElementById('mapa');
+	mapaContainer.style.visibility = 'visible';
+
 	let coordenadasMapa = getWGSCoordinates(coordenadas);
 
-	var map = L.map('mapa').setView([coordenadasMapa[0], coordenadasMapa[1]], 16);
+	var map = L.map('mapa', { closePopupOnClick: false }).setView([coordenadasMapa[0], coordenadasMapa[1]], 16);
+	mapaContainer.addEventListener('focusout', function () {
+		mapaContainer.style.visibility = 'hidden';
+		map.off();
+		map.remove();
+
+		padreMapa = document.getElementById('mapa').parentNode;
+	padreMapa.removeChild(mapaContainer);
+
+	var newMapaContainer = document.createElement("div");
+	newMapaContainer.setAttribute("id", "mapa");
+	padreMapa.appendChild(newMapaContainer);
+	
+
+	});
+
+
 	let tilerMapUrl = 'https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=FeZF25xvZUuP463NS59g';
-        L.tileLayer(tilerMapUrl, {
-            attribution: 'Map data © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, Imagery © <a href="http://www.kartena.se/">Kartena</a>',
-		}).addTo(map);
-		
+	L.tileLayer(tilerMapUrl, {
+		attribution: 'Map data © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, Imagery © <a href="http://www.kartena.se/">Kartena</a>',
+	}).addTo(map);
+
 
 	/* var imagenFalla = L.icon({
 		iconUrl: urlImagen,
@@ -148,15 +169,22 @@ function buscarUbicacion(coordenadas,urlImagen){
 		popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 	}); */
 
-	L.marker(coordenadasMapa).addTo(map);
+	var popup = L.popup()
+		.setContent(
+			`<div class="popUpMapa">
+			 <img src="${urlImagen}">
+	 		</div>`)
+		.openPopup();
 
+	L.marker(coordenadasMapa).addTo(map).bindPopup(popup).openPopup();
 
+	mapaContainer.focus();
 }
 
 function getWGSCoordinates(coordenadas) {
-        
+
 	// Cambiar la proyeccion de la referencia espacial 25830 a 4326
-	let firstProjection  = '+proj=utm +zone=30 +ellps=GRS80 +units=m +no_defs';
+	let firstProjection = '+proj=utm +zone=30 +ellps=GRS80 +units=m +no_defs';
 	let secondProjection = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs';
 	coordenadas = proj4(firstProjection, secondProjection, coordenadas);
 
@@ -164,6 +192,6 @@ function getWGSCoordinates(coordenadas) {
 }
 
 
-window.onload=init;
-    
+window.onload = init;
+
 
