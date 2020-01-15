@@ -17,6 +17,8 @@ h1 {
   text-align: center;
 }
 
+
+
 #secciones{
   width: 20%;
   text-align: center;
@@ -26,6 +28,14 @@ h1 {
 form {
   text-align: center;
   margin: 2%;
+}
+
+#imagenFalla{
+
+  input[type='radio']{
+    transform: scale(5);
+  }
+
 }
 
 .resultados {

@@ -41,6 +41,7 @@ require('./app/routes/puntuaciones.routes.js')(app);
 
 
 // Escuchemos en un puerto
+//poner aqui 
 app.listen(3000,() => {
     console.log(" * [ Mongo Fallero ] UP and Running en http://localhost:3000");
 });

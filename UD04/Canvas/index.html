@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejemplos Básicos CANVAS - 01</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1> Ejemplos de Canvas Básico - 01</h1>
+    </header>
+
+    <main>
+        <canvas width="640" height="640">
+        </canvas>
+    </main>
+
+    <script>
+        const canvas = document.querySelector("canvas");
+
+        // contexto -> ctx
+        let ctx = canvas.getContext("2d");
+        let contador = 0;
+        for (let i = 0; i < 640; i += 80) {
+
+            for (let j = 0; j < 640; j += 80) {
+
+                if (i / 80 % 2 == 0) {
+                    if (j / 80 % 2 == 0) {
+                        ctx.fillStyle = "white"
+                        ctx.fillRect(j, i, 80, 80);
+                    } else {
+                        ctx.fillStyle = "black"
+                        ctx.fillRect(j, i, 80, 80);
+                    }
+
+                } else {
+                    if (j / 80 % 2 == 0) {
+                        ctx.fillStyle = "black"
+                        ctx.fillRect(j, i, 80, 80);
+                    } else {
+                        ctx.fillStyle = "white"
+                        ctx.fillRect(j, i, 80, 80);
+                    }
+                }
+
+            }
+
+        }
+
+
+
+
+
+
+
+
+        /* ctx.strokeStyle="purple";
+        ctx.lineWidth=1; */
+        //ctx.strokeRect(10,10,100,200);
+
+        /* ctx.beginPath();
+        ctx.moveTo(100,100);
+        ctx.lineTo(50,50);
+        ctx.lineTo(50,100);
+        ctx.lineTo(100,100);
+        ctx.fill();
+        ctx.stroke(); */
+
+        //ctx.quadraticCurveTo(100,100,200,0);
+
+
+
+
+    </script>
+</body>
+
+</html>
