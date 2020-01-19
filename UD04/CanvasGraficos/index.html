@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Graficos Canvas</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1> Graficos Canvas             x ->           y !</h1>
+    </header>
+
+    <main>
+        <canvas width="640" height="640">
+        </canvas>
+    </main>
+
+    <script>
+
+        const dioses = [
+            { nombre: "Cthulhu", poder: 1000, color: "green" },
+            { nombre: "Nyarlatothep", poder: 600, color: "red" },
+            { nombre: "Azazoth", poder: 1400, color: "grey" },
+            { nombre: "Pepe", poder: 800, color: "purple" }
+        ];
+
+        const canvas = document.querySelector("canvas");
+
+        // contexto -> ctx
+        let ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "red";
+
+        //ctx.fillRect(10,10,100,200);
+        ctx.strokeStyle = "purple";
+        ctx.lineWidth = 1;
+        //ctx.strokeRect(10,10,100,200);
+
+        for (let i = 0; i < dioses.length; i++) {
+            ctx.beginPath();
+            ctx.moveTo(0, 640);
+            ctx.lineTo(0, 200);
+            ctx.lineTo(100, 200);
+            ctx.lineTo(100, 640);
+            //ctx.fill();200
+            ctx.stroke();
+            
+        }
+
+       
+
+      
+       /*  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.moveTo(200, 200);
+
+        // control, destino
+        //ctx.quadraticCurveTo(100,100,200,0);
+        //ctx.bezierCurveTo(100,100,70,70,200,0);
+
+        ctx.beginPath();
+
+        //ctx.arc(200,200,50,0.2,1 * Math.PI);
+
+
+
+        ctx.stroke() */;
+
+        
+
+        //let anguloActual = -0.5 * Math.PI;
+
+    </script>
+</body>
+
+</html>
