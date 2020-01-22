@@ -7,126 +7,34 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Graficos Canvas</title>
     <link rel="stylesheet" href="./css/style.css">
+    <script src="script.js"></script>
+
 </head>
 
 <body>
-    <header>
-        <h1> Graficos Canvas x -> y !</h1>
-    </header>
 
+    <header> <h1>Ejemplo de Graficas </h1></header>
     <main>
-        <canvas id="barras" width="640" height="640">
+        <datos>
+            <p class="left"> Clave</p>  <p class="right">Valor</p>
+            <input class="left" type="text" name="key_1"><input class="right" type="text" name="value_1">
+            <input class="left" type="text" name="key_2"><input class="right" type="text" name="value_2">
+            <input class="left" type="text" name="key_3"><input class="right" type="text" name="value_3">
+            <input class="left" type="text" name="key_4"><input class="right" type="text" name="value_4">
+
+            <input type="button" name="grafiqueame" value="Grafiqueame">
+        </datos>
+        <canvas id="barras" width="400" height="400">
         </canvas>
 
-        <canvas id="circulo" width="600" height="600">
+        <canvas id="circulo" width="400" height="400">
+        </canvas>
+
+        <canvas id="lineaPuntos" width="400" height="400">
         </canvas>
     </main>
+    <footer></footer>
 
-    <script>
-
-        const dioses = [
-            { nombre: "Cthulhu", poder: 1000, color: "green" },
-            { nombre: "Nyarlatothep", poder: 600, color: "red" },
-            { nombre: "Azazoth", poder: 1400, color: "grey" },
-            { nombre: "Pepe", poder: 800, color: "purple" }
-        ];
-
-        //Grafico de barras
-
-        const canvas = document.getElementById("barras");
-
-        // contexto -> ctx
-        let ctx = canvas.getContext("2d");
-
-        ctx.fillStyle = "red";
-        ctx.strokeStyle = "purple";
-        ctx.lineWidth = 1;
-
-        for (let i = 1; i <= dioses.length; i++) {
-            var poderDioses = dioses[i - 1].poder / 10;
-            var nombreDioses = dioses[i - 1].nombre;
-
-
-            ctx.beginPath();
-            ctx.moveTo(i * 100 - 100, 640);
-            ctx.lineTo(i * 100 - 100, poderDioses);
-            ctx.lineTo(i * 100, poderDioses);
-            ctx.lineTo(i * 100, 640);
-            //ctx.fill();200
-            ctx.font = "15px Arial";
-            ctx.fillStyle = "black"
-            ctx.fillText(nombreDioses, i * 100 - 100, 620);
-            ctx.stroke();
-
-        }
-
-
-        //Fin grafico de barras
-
-        const canvasCircle = document.getElementById("circulo");
-
-        let ctx2 = canvasCircle.getContext("2d");
-
-
-        var total = 3800;
-
-        var anguloPrincipal = 0;
-        var anguloFinal = 0;
-
-
-        for (var i = 0; i < dioses.length; i++) {
-            // Angulo Principal
-            anguloPrincipal = anguloFinal;
-            // Angulo Final
-            anguloFinal = anguloFinal + (dioses[i].poder * 100 / total / 100) * 2 * Math.PI;
-
-            ctx2.beginPath();
-            // Rellenar color
-
-            var pieRadius = Math.min(ctx2.canvas.width / 2, ctx2.canvas.height / 2);
-            var labelX = ctx2.canvas.width / 2 + (pieRadius / 2) * Math.cos(anguloPrincipal + (anguloFinal - anguloPrincipal) / 2);
-            var labelY = ctx2.canvas.height / 2 + (pieRadius / 2) * Math.sin(anguloPrincipal + (anguloFinal - anguloPrincipal) / 2)
-            ctx2.font = "bold 10px Arial";
-            ctx2.fillText("test", labelX, labelY);
-
-
-            ctx2.fillStyle = dioses[i].color;
-
-            ctx2.moveTo(300, 300);
-            ctx2.arc(300, 300, 120, anguloPrincipal, anguloFinal);
-            ctx2.lineTo(300, 300);
-            ctx2.stroke();
-
-
-
-            // Fill
-            ctx2.fill();
-
-        }
-
-        //ctx.strokeRect(10,10,100,200);
-
-        /*  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-         ctx.moveTo(200, 200);
-
-         // control, destino
-         //ctx.quadraticCurveTo(100,100,200,0);
-         //ctx.bezierCurveTo(100,100,70,70,200,0);
-
-         ctx.beginPath();
-
-         //ctx.arc(200,200,50,0.2,1 * Math.PI);
-
-
-
-         ctx.stroke() */
-
-
-
-        //let anguloActual = -0.5 * Math.PI;
-
-    </script>
 </body>
 
 </html>
