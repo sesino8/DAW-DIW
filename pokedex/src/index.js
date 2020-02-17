@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-const urlPokemons = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1000";
+const urlPokemons = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10";
 const contenedorPokemons = document.getElementById("pokemonContainer");
 const filtroInput = document.querySelector("input");
 
@@ -31,7 +31,7 @@ function init() {
     });
 
     var button = document.querySelector("button");
-    button.addEventListener("click",buscar);
+    button.addEventListener("click", buscar);
 
 
     const fetchPromesa = fetch(urlPokemons);
@@ -39,13 +39,14 @@ function init() {
         return response.json();
     }).then(respuesta => {
         respuesta.results.forEach(pokemon => {
-            pokemonUrlPromise.push(devuelvePomkemon(pokemon.url))
+            pokemonUrlPromise.push(devuelvePomkemon(pokemon.url));
+
         })
 
         Promise.all(pokemonUrlPromise).then(pokemon => {
             pokemons.push(...pokemon);
-    
-        })
+        });
+
     });
 
 }
@@ -55,29 +56,29 @@ async function buscar() {
     pokemonsRellenar = [];
 
     pokemonsRellenar = pokemons.filter(comprobarNombre);
-    console.log(pokemonsRellenar);
+
     rellenarContainer();
 
 }
 
-function comprobarNombre(pokemon){
+function comprobarNombre(pokemon) {
 
     var valueFiltro = filtroInput.value;
 
     var nombre = pokemon.name;
-    
-    return nombre.includes(valueFiltro);
-    
-} 
 
-function rellenarContainer(){
+    return nombre.includes(valueFiltro);
+
+}
+
+function rellenarContainer() {
 
     //contenedorPokemons
 
     contenedorPokemons.innerHTML = "";
 
     pokemonsRellenar.forEach(pokemon => {
-        
+
         var celda = document.createElement("div");
 
         var imagenPokemon = document.createElement("img");
@@ -90,31 +91,89 @@ function rellenarContainer(){
 
         celda.appendChild(h3);
 
-        console.log(pokemon.abilities.length);
-        
+        var celdaDescripcion = document.createElement("div");
+        celdaDescripcion.id = "description";
+        celda.appendChild(celdaDescripcion);
 
-        var p = document.createElement("p");
+        var habilidades = document.createElement("div");
+        var titulo = document.createElement("h4");
+        titulo.innerText = "Abilities"
+
+        habilidades.appendChild(titulo);
+
         for (let i = 0; i < pokemon.abilities.length; i++) {
-            p.innerText += pokemon.abilities[i].ability.name+" ";
-        }
-
-        celda.appendChild(p);
-
-        var tipos = document.createElement("p");
-        for (let i = 0; i < pokemon.types; i++) {
-            p.innerText += pokemon.abilities[i].type.name+" ";
+            var p = document.createElement("p");
+            p.innerText = pokemon.abilities[i].ability.name;
+            habilidades.appendChild(p);
 
         }
 
-        celda.appendChild(tipos);
+        celdaDescripcion.appendChild(habilidades)
+
+        var tiposDiv = document.createElement("div");
+        var tituloTipos = document.createElement("h4");
+        tituloTipos.innerText = "Types";
+
+        tiposDiv.appendChild(tituloTipos);
+
+
+        for (let i = 0; i < pokemon.types.length; i++) {
+            var tipos = document.createElement("p");
+            tipos.innerText = pokemon.types[i].type.name;
+            tiposDiv.appendChild(tipos);
+
+        }
+
+        celdaDescripcion.appendChild(tiposDiv);
+
+
+        var experienceDiv = document.createElement("div");
+        var tituloExperiencia = document.createElement("h4");
+        tituloExperiencia.innerText = "Experience";
+
+        experienceDiv.appendChild(tituloExperiencia);
+
+        tipos = document.createElement("p");
+        tipos.innerText = pokemon.base_experience;
+        experienceDiv.appendChild(tipos);
+
+
+
+        celdaDescripcion.appendChild(experienceDiv);
+
+
+
+        var measurementsDiv = document.createElement("div");
+        var tituloMeasurements = document.createElement("h4");
+        tituloMeasurements.innerText = "Measurements";
+
+        measurementsDiv.appendChild(tituloMeasurements);
+
+        tipos = document.createElement("p");
+        tipos.innerText = "Height: " + pokemon.height;
+        measurementsDiv.appendChild(tipos);
+
+        tipos = document.createElement("p");
+        tipos.innerText = "Weight: " + pokemon.weight;
+        measurementsDiv.appendChild(tipos);
+
+
+
+        celdaDescripcion.appendChild(measurementsDiv);
+
+
+
+
+
 
         contenedorPokemons.appendChild(celda);
-        
+
     })
 
-    
 
-} 
+
+}
+
 
 
 
