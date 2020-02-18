@@ -7,13 +7,14 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-const urlPokemons = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10";
+const urlPokemons = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1000";
 const contenedorPokemons = document.getElementById("pokemonContainer");
 const filtroInput = document.querySelector("input");
 
 var pokemonUrlPromise = [];
 var pokemons = [];
 var pokemonsRellenar = [];
+var divCargando;
 
 
 function devuelvePomkemon(url) {
@@ -45,6 +46,8 @@ function init() {
 
         Promise.all(pokemonUrlPromise).then(pokemon => {
             pokemons.push(...pokemon);
+            document.getElementById("cargando").style.visibility = "hidden";
+
         });
 
     });
@@ -53,17 +56,23 @@ function init() {
 
 async function buscar() {
 
+    document.getElementById("cargando").style.visibility = "visible";
+
     pokemonsRellenar = [];
 
     pokemonsRellenar = pokemons.filter(comprobarNombre);
 
-    rellenarContainer();
+    await rellenarContainer();
+
+    document.getElementById("cargando").style.visibility = "hidden";
+
+    
 
 }
 
 function comprobarNombre(pokemon) {
 
-    var valueFiltro = filtroInput.value;
+    var valueFiltro = filtroInput.value.toLowerCase();
 
     var nombre = pokemon.name;
 
@@ -71,9 +80,7 @@ function comprobarNombre(pokemon) {
 
 }
 
-function rellenarContainer() {
-
-    //contenedorPokemons
+async function rellenarContainer() {
 
     contenedorPokemons.innerHTML = "";
 
@@ -82,8 +89,9 @@ function rellenarContainer() {
         var celda = document.createElement("div");
 
         var imagenPokemon = document.createElement("img");
-        imagenPokemon.src = pokemon.sprites.front_default;
 
+        pokemon.sprites.front_default == null ? imagenPokemon.src = "../missingno.png" : imagenPokemon.src = pokemon.sprites.front_default;
+        imagenPokemon.alt = "Imagen de: "+ pokemon.name;
         celda.appendChild(imagenPokemon);
 
         var h3 = document.createElement("h3");
@@ -101,9 +109,14 @@ function rellenarContainer() {
 
         habilidades.appendChild(titulo);
 
-        for (let i = 0; i < pokemon.abilities.length; i++) {
+        var tamanyo;
+
+        pokemon.moves.length <= 2 ? tamanyo = pokemon.moves.length : tamanyo = 2;
+
+        for (let i = 0; i < tamanyo; i++) {
+            
             var p = document.createElement("p");
-            p.innerText = pokemon.abilities[i].ability.name;
+            p.innerText = pokemon.moves[i].move.name;
             habilidades.appendChild(p);
 
         }

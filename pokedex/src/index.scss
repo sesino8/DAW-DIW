@@ -61,15 +61,42 @@ body {
     }
   }
 
-  #pokemonContainer {
+  #cargando {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+    background-color: white;
+
+
+    img {
+
+    animation-duration: 1.5s;
+    animation-name: changewidth;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    width: 100px;
+    }
+  }
+
+  #pokemonContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
     margin-top: 5%;
 
+    @keyframes changewidth {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(2);
+
+      }
+    }
+
     div {
-      margin: 1%;
+      margin: 5%;
 
       display: inline-block;
       text-align: center;
@@ -92,27 +119,25 @@ body {
       -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
       transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
 
-      img{
-        width: 30%;
+      img {
+        width: 50%;
       }
 
-      h3{
+      h3 {
         font-family: pokemonFont;
         font-size: 20px;
         text-shadow: 1px 1px 0px black;
       }
 
-      #description{
-
+      #description {
         display: grid;
-        grid-template-columns: repeat(2,50%);
-        grid-template-rows: repeat(2,1fr);
+        grid-template-columns: repeat(2, 50%);
+        grid-template-rows: repeat(2, 1fr);
         background-color: rgba(0, 0, 0, 0.5);
         border: none;
         border-radius: initial;
 
-
-        h4{
+        h4 {
           font-family: pokemonFont;
           font-size: 15px;
           color: black;
@@ -124,14 +149,35 @@ body {
           text-shadow: 1px 1px 5px black;
         }
 
-        div{
-          border-radius: unset;
+        div {
           margin: 5%;
+          min-height: initial;
+          border-radius: unset;
         }
-
       }
+    }
+  }
+}
 
-      
+@media only screen and (max-width: 850px) {
+  body {
+    #pokemonContainer {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  body {
+    #pokemonContainer {
+      display: grid;
+      grid-template-columns: 1fr;
+
+      #description {
+        margin: 0px;
+        padding: 0px;
+      }
     }
   }
 }
